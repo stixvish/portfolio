@@ -7,7 +7,7 @@ export default function Home() {
 	const [images, setImages] = useState([]);
 
 	useEffect(() => {
-		const gallery = Object.values(import.meta.glob('/src/assets/images/*.webp', {query: '?url', import: 'default'}));
+		const gallery = Object.values(import.meta.glob('/src/assets/images/*.{webp,png,jpeg}', {query: '?url', import: 'default'}));
 		const mySet = new Set();
 		const myArray = [];
 		while (mySet.size < 3) {
