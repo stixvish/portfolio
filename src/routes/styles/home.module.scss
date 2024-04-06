@@ -24,6 +24,7 @@
 		repeat: repeat;
 		size: auto 100%;
 	}
+	overflow: hidden;
 }
 
 .intro {
@@ -36,7 +37,6 @@
 			size: 8rem;
 			weight: 750;
 		}
-		letter-spacing: -0.05em;
 		margin-top: -3rem;
 		user-select: none;
 		-webkit-user-select: none;
