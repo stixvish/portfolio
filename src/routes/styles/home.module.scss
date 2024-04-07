@@ -52,3 +52,25 @@
 		}
 	}
 }
+
+@media (max-width: 800px) {
+	.intro {
+		h1 {
+			font-size: 10rem;
+		}
+	}
+	.background {
+		div + div + div {
+			display: none;
+		}
+	}
+}
+
+@media (max-width: 550px) {
+	.background {
+		div + div {
+			display: none;
+		}
+	}
+}
+
