@@ -1,7 +1,11 @@
 * {
 	margin: 0;
 	padding: 0;
-	font-size: min(1svw, 45px);
+	box-sizing: inherit;
+}
+
+html {
+	font-size: min(1svw, 22px);
 }
 
 body {

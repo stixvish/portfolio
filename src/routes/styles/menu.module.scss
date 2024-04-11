@@ -1,5 +1,15 @@
 .main {
-	height: 100svh;
+	display: flex;
+	position: fixed;
+	z-index: 10;
 	width: 100svw;
 	background-color: white;
+}
+
+.open {
+	height: 100svh;
+}
+
+.close {
+	height: 0;
 }
