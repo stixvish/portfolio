@@ -68,10 +68,10 @@ export default function Resume() {
 					<div className={styles.place}>
 						<img src="https://pbs.twimg.com/profile_images/1476237803763773447/bL1_CQLe_400x400.jpg" className={styles.image} alt="NSF Image" />
 						<div className={styles.info}>
-							<h3>College of DuPage</h3>
-							<p>Associate of Science (A.S.)</p>
-							<p>May 2023 - May 2024 (expected)</p>
-							<p>Glen Ellyn, IL</p>
+							<h3>NSF REU Fellow</h3>
+							<p>NSF-Funded 311 Lab</p>
+							<p>June 2022 - August 2022</p>
+							<p>Tempe, AZ</p>
 						</div>
 					</div>
 					<div className={styles.description}>
@@ -83,9 +83,9 @@ export default function Resume() {
 						<img src="https://pbs.twimg.com/profile_images/1011304005710987267/emBfUZKK_400x400.jpg" className={styles.image} alt="Isos Image" />
 						<div className={styles.info}>
 							<h3>Development Intern</h3>
-							<p>Associate of Science (A.S.)</p>
-							<p>May 2023 - May 2024 (expected)</p>
-							<p>Glen Ellyn, IL</p>
+							<p>Isos Technology</p>
+							<p>June 2022 - August 2022</p>
+							<p>Tempe, AZ</p>
 						</div>
 					</div>
 					<div className={styles.description}>
