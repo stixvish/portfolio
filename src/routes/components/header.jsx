@@ -17,7 +17,7 @@ export default function Header() {
 		<>
 			<Menu toggle={toggle} />
 			<div className={styles.main}>
-				<div className={styles.logo}>
+				<div className={`${styles.logo} ${toggle ? styles.change : ''}`}>
 					<Link to='/'>stix</Link>
 				</div>
 				<div className={`${toggle ? styles.close : styles.open}`} onClick={() => setToggle(true)}>

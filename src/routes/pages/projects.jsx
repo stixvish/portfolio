@@ -23,7 +23,6 @@ export default function Projects() {
 									<p>Express</p>
 									<p>React.js</p>
 									<p>Node.js</p>
-									<p>Typescript</p>
 								</div>
 							</div>
 						</div>
