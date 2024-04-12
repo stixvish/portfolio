@@ -1,60 +1,59 @@
-.main {
-	display: flex;
-	flex-direction: column;
-	width: 100svw;
-	height: 100svh;
-	font-size: 1.125rem;
-}
-
 .header {
+	padding-top: 5.5rem;
 	display: flex;
 	justify-content: center;
-	position: relative;
-	padding-top: 6rem;
-	padding-bottom: 1.5rem;
-	width: 100%;
-}
-
-svg {
-	width: 3rem;
-	height: 3rem;
+	padding-bottom: 1rem;
 }
 
 .content {
 	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 100%;
 }
 
-.category {
+.place {
 	display: flex;
-	flex-direction: column;
-	width: 50%;
+	align-items: center;
 }
 
-.title {
-	margin: 0;
-	align-self: center;
+.section {
+	overflow: hidden;
 }
 
 .info {
-	display: flex;
-	margin: 0.5rem 0 0.5rem 12.5svw;
-	img {
-		width: 6rem;
-		height: 6rem;
-		border-radius: 1rem;
-	}
-	div {
-		margin-left: 1rem;
-		p {
-			font-style: italic;
-		}
+	p {
+		font-style: italic;
+		font-size: 1.5rem;
 	}
 }
 
 .description {
+	border-left: 2px solid;
+	margin-left: 4rem;
 	max-width: 22.5svw;
-	padding-left: 3.75rem;
-	font-size: 1rem;
-	margin-left: calc(12.5svw + 3rem);
-	border-left: 0.25rem solid white;
+	padding-left: 5rem;
+	padding-bottom: 1rem;
+	padding-top: 1rem;	
+	font-size: 1.5rem;
+}
+
+img {
+	width: 8rem;
+	height: 8rem;
+	border-radius: 10%;
+	margin-right: 1rem;
+}
+
+h1 {
+	font-size: 3rem;
+}
+
+h2 {
+	font-size: 2.5rem;
+	margin-bottom: 1rem;
+}
+
+h3 {
+	font-size: 2rem;
 }
