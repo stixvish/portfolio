@@ -1,14 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../styles/header.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Menu from './menu';
 
 export default function Header() {
 
 	const [toggle, setToggle] = useState(false);
+
+	const location = useLocation();
+
+	useEffect(() => {
+		setToggle(false);
+	}, [location])
 	
 	return (
-		<div>
+		<>
 			<Menu toggle={toggle} />
 			<div className={styles.main}>
 				<div className={styles.logo}>
@@ -28,6 +34,6 @@ export default function Header() {
 					</svg>
 				</div>
 			</div>
-		</div>
+		</>
 	)
 }``

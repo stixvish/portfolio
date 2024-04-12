@@ -1,15 +1,32 @@
 .main {
 	display: flex;
 	position: fixed;
-	z-index: 10;
+	z-index: 0;
 	width: 100svw;
+	height: 0;
 	background-color: white;
+	color: black;
+	transition: height 0.75s ease-out;
 }
 
 .open {
 	height: 100svh;
 }
 
-.close {
-	height: 0;
+.section {
+	display: flex;
+	width: 50%;
+	margin-left: 5rem;
+	margin-bottom: 3rem;
+}
+
+.routes, .info {
+	display: flex;
+	justify-content: end;
+	flex-direction: column;
+	font-size: 3rem;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	a {
+		text-decoration: none;
+	}
 }
