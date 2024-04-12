@@ -7,8 +7,12 @@ import {
 import Home from './routes/pages/home';
 import Error from './routes/pages/error';
 import Resume from './routes/pages/resume';
-import Root from './routes/pages/root';
+import Root from './routes/root';
 import './routes/styles/globals.scss';
+import Contact from './routes/pages/contact';
+import Projects from './routes/pages/projects';
+import Fantasy from './routes/pages/fantasy';
+import About from './routes/pages/about';
 
 const router = createBrowserRouter([
 	{
@@ -18,6 +22,10 @@ const router = createBrowserRouter([
 		children: [
 			{path: '/', element: <Home />},
 			{path: '/resume', element: <Resume />},
+			{path: '/contact', element: <Contact />},
+			{path: '/projects', element: <Projects />},
+			{path: '/fantasy', element: <Fantasy />},
+			{path: '/about', element: <About />}
 		]
 	},
 ]);
