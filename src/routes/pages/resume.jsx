@@ -14,7 +14,7 @@ export default function Resume() {
 						<div className={styles.info}>
 							<h3>College of DuPage</h3>
 							<p>Associate of Science (A.S.)</p>
-							<p>May 2023 - May 2024 (expected)</p>
+							<p>May 2023 - May 2024</p>
 							<p>Glen Ellyn, IL</p>
 						</div>
 					</div>
