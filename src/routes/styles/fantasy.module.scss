@@ -1,0 +1,9 @@
+.main {
+	height: 100dvh;
+	overflow-y: auto;
+	scrollbar-width: none;
+}
+
+.main::-webkit-scrollbar {
+	display: none;
+}

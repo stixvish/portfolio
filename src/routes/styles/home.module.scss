@@ -1,6 +1,6 @@
 .main {
-	height: 100svh;
-	width: 100svw;
+	width: 100dvw;
+	height: 100dvh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -8,68 +8,39 @@
 
 .background {
 	display: flex;
-	position: fixed;
-	width: 100svw;
-	z-index: -1;
+	width: 100%;
+	height: 100%;
 	opacity: 0.5;
+	z-index: 1;
 }
 
 .photo {
-	display: flex;
-	flex-grow: 1;
-	height: 100svh;
-	min-height: 900px;
+	overflow: none;
+	width: 33.33%;
+	height: 100%;
 	background: {
 		position: center center;
-		repeat: repeat;
 		size: auto 100%;
-	}
-	overflow: hidden;
+		repeat: repeat;
+	};
 }
 
 .intro {
+	position: absolute;
 	display: flex;
 	flex-direction: column;
-	color: white;
+	align-items: center;
+	z-index: 2;
 	h1 {
-		font: {
-			size: 8rem;
-			weight: 750;
-		}
-		margin-top: -2rem;
-		user-select: none;
-		-webkit-user-select: none;
+		font-size: 6.5rem;
+	}
+	p {
+		font-size: 2rem;
+	}
+	:nth-child(1) {
+		margin-left: -5rem;
 	}
 	:nth-child(2) {
 		margin-left: 5rem;
 	}
-	p {
-		align-self: center;
-		font: {
-			size: 2rem;
-			weight: 300;
-		}
-	}
 }
-
-@media (max-width: 800px) {
-	.intro {
-		h1 {
-			font-size: 10rem;
-		}
-	}
-	.background {
-		div + div + div {
-			display: none;
-		}
-	}
-}
-
-@media (max-width: 550px) {
-	.background {
-		div + div {
-			display: none;
-		}
-	}
-}
-

@@ -1,39 +1,63 @@
-import { useEffect, useState } from 'react';
-import styles from '../styles/header.module.scss';
+import { useState, useEffect } from 'react';
+// import { Link, useLocation } from 'react-router-dom';
 import { Link, useLocation } from 'react-router-dom';
-import Menu from './menu';
+import styles from '../styles/header.module.scss';
 
 export default function Header() {
 
-	const [toggle, setToggle] = useState(false);
-
+	const [open, setOpen] = useState(false)
 	const location = useLocation();
 
 	useEffect(() => {
-		setToggle(false);
+		if (open) {
+			document.body.style.overflow = "hidden"; // Disable scrolling
+		} else {
+			document.body.style.overflow = ""; // Revert to default
+		}
+		return () => {
+			document.body.style.overflow = ""; // Clean up on unmount
+		};
+	}, [open]);
+
+	useEffect(() => {
+		setOpen(false)
 	}, [location])
-	
+
 	return (
-		<>
-			<Menu toggle={toggle} />
+		<>	
+			<div className={styles.menu} style={{ height: open ? "100dvh" : "0" }}>
+				<div className={styles.side}>
+					<div className={styles.infoContainer}>
+						<p style={{color: "#a374ff"}}>GET IN TOUCH</p>
+						<a href='mailto:gupta.v.vishesh@gmail.com'>gupta.v.vishesh@gmail.com</a>
+						<a href='tel:6309464449'>(630) 946-4449</a>
+					</div>
+				</div>
+				<div className={styles.side}>
+					<div className={styles.linkContainer}>
+						<Link to='/about'>about me</Link>
+						<Link to='/resume'>resume</Link>
+						<Link to='/projects'>projects</Link>
+						<Link to='/fantasy'>fantasy</Link>
+						<Link to='/contact'>contact</Link>
+					</div>
+				</div>
+			</div>
 			<div className={styles.main}>
-				<div className={`${styles.logo} ${toggle ? styles.change : ''}`}>
-					<Link to='/'>stix</Link>
-				</div>
-				<div className={`${toggle ? styles.close : styles.open}`} onClick={() => setToggle(true)}>
-					<svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M0 1L16 1" stroke="currentColor" strokeWidth="2" />
-						<path d="M0 6L16 6" stroke="currentColor" strokeWidth="2" />
-						<path d="M0 11L16 11" stroke="currentColor" strokeWidth="2" />
-					</svg>
-				</div>
-				<div className={`${toggle ? styles.open : styles.close}`} onClick={() => setToggle(false)}>
-					<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M0.757812 9.24268L9.24309 0.757393" stroke="currentColor" strokeWidth="2" />
-						<path d="M0.757812 0.757324L9.24309 9.24261" stroke="currentColor" strokeWidth="2" />
-					</svg>
-				</div>
+				<Link to='/' style={{ color: open ? "#a374ff" : "white"  }}>stix</Link>
+				<svg className={styles.icon} viewBox='0 0 10 10' height={`100%`} onClick={() => setOpen(!open)} style={{ display: open ? "none" : "block" }}>
+					<circle id='border' cx="5" cy="5" r="4.5" fill='white'/>
+					<line x1='3.5' y1='4.2' x2='6.5' y2='4.2' stroke='black' strokeWidth='0.3'/>
+					<line x1='3.5' y1='5' x2='6.5' y2='5' stroke='black' strokeWidth='0.3'/>
+					<line x1='3.5' y1='5.8' x2='6.5' y2='5.8' stroke='black' strokeWidth='0.3'/>
+				</svg>
+				<svg className={styles.icon} viewBox='0 0 10 10' height={`100%`} onClick={() => setOpen(!open)} style={{ display: open ? "block" : "none" }}>
+					<circle id='border' cx="5" cy="5" r="4.5" fill='white' stroke='#a374ff' strokeWidth='0.1'/>
+					<line x1='4' y1='4' x2='6' y2='6' stroke='black' strokeWidth='0.5'/>
+					<line x1='4' y1='6' x2='6' y2='4' stroke='black' strokeWidth='0.5'/>
+				</svg>
 			</div>
 		</>
 	)
-}``
+	
+}
