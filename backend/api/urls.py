@@ -1,11 +1,18 @@
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import TransactionsViewSet, categorySpending
+from rest_framework import routers
+from .views import (
+    AccountViewSet, CategoryViewSet, PointRuleViewSet,
+    TransactionViewSet, DebtViewSet, PaymentViewSet
+)
 
-router = DefaultRouter()
-router.register(r'transactions', TransactionsViewSet, basename='transactions')
+router = routers.DefaultRouter()
+router.register(r'accounts', AccountViewSet)
+router.register(r'categories', CategoryViewSet)
+router.register(r'pointrules', PointRuleViewSet)
+router.register(r'transactions', TransactionViewSet)
+router.register(r'debts', DebtViewSet)
+router.register(r'payments', PaymentViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('category-spending/', categorySpending),
+    path('api/', include(router.urls)),
 ]
