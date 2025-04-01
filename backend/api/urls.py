@@ -1,18 +1,9 @@
-from django.urls import path, include
-from rest_framework import routers
-from .views import (
-    AccountViewSet, CategoryViewSet, PointRuleViewSet,
-    TransactionViewSet, DebtViewSet, PaymentViewSet
-)
-
-router = routers.DefaultRouter()
-router.register(r'accounts', AccountViewSet)
-router.register(r'categories', CategoryViewSet)
-router.register(r'pointrules', PointRuleViewSet)
-router.register(r'transactions', TransactionViewSet)
-router.register(r'debts', DebtViewSet)
-router.register(r'payments', PaymentViewSet)
+from django.urls import path
+from .views import AccountList, CategoryList, TransactionList, DebtList
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+	path('accounts/', AccountList.as_view(), name='account-list'),
+	path('categories/', CategoryList.as_view(), name='category-list'),
+  path('transactions/', TransactionList.as_view(), name='transaction-list'),
+  path('debt/', DebtList.as_view(), name='debt-list'),
 ]

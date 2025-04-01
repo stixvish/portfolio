@@ -1,8 +1,9 @@
 .main {
 	display: grid;
-	grid-template-rows: 1fr 1.5fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 2rem;
 	padding: {
-		top: 8rem;
+		top: 8.5rem;
 		bottom: 2rem;
 		left: 3rem;
 		right: 3rem;
@@ -11,21 +12,58 @@
 	height: 100dvh;
 }
 
-.top {
+.trisection {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 4rem;
-	padding: 1rem 0rem;
-	justify-content: space-between;
-	border: solid 1px white;
+	grid-template-rows: 1fr 1fr;
+	height: 100%;
+	gap: 1rem;
+	overflow: hidden;
 }
 
-.spending {
+.graph {
+	border: 1px solid white;
+	border-radius: 25px;
 	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	padding: 20px 20px;
-	font-size: 1.5rem;
-	border: solid 1px white;
-	border-radius: 20px;
+	svg {
+		width: 50%;
+	}
+}
+
+.transactions {
+	border: 1px solid white;
+	border-radius: 25px;
+	overflow: scroll;
+	padding: {
+		left: 2rem;
+		right: 2rem;
+	}
+	.headers, .row {
+		display: grid;
+		grid-template-columns: 7fr 3fr;
+	}
+	.headers {
+		position: sticky;
+		top: 0;
+		background-color: #1d1d1d;
+		padding: {
+			top: 1rem;
+			bottom: 0.5rem;
+		}
+		border-bottom: solid 1px white;
+	}
+	.row {
+		padding: {
+			top: 1rem;
+			bottom: 1rem;
+		}
+		border: {
+			bottom: solid 1px white;
+		}
+		white-space: nowrap;
+	}
+	p {
+		font-size: 1.5rem;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 }

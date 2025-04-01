@@ -1,126 +1,61 @@
 from django.db import models
-from django.core.validators import MinValueValidator
-from django.utils import timezone
-from decimal import Decimal
+
+# Create your models here.
+class AccountType(models.Model):
+	atype_id = models.AutoField(primary_key=True)
+	description = models.CharField(max_length=50)
+	def __str__(self):
+		return self.name
 
 class Account(models.Model):
-    # The aid field corresponds to the SQL SERIAL PRIMARY KEY.
-    aid = models.AutoField(primary_key=True)
-    aname = models.CharField(max_length=100)
-    atype = models.CharField(max_length=50)
-    balance = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
-
-    class Meta:
-        db_table = 'account'
-
-    def __str__(self):
-        return self.aname
-
+	aid = models.AutoField(primary_key=True)
+	aname = models.CharField(max_length=75)
+	atype_id = models.ForeignKey(AccountType, on_delete=models.CASCADE, db_column='atype_id')
+	balance = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+	def __str__(self):
+		return self.name
+	
+class CategoryType(models.Model):
+	ctype_id = models.AutoField(primary_key=True)
+	description = models.CharField(max_length=75)
+	def __str__(self):
+		return self.name
 
 class Category(models.Model):
-    cid = models.AutoField(primary_key=True)
-    cname = models.CharField(max_length=100, unique=True)
-    ctype = models.CharField(max_length=50)
-
-    class Meta:
-        db_table = 'category'
-
-    def __str__(self):
-        return self.cname
-
-
-class PointRule(models.Model):
-    # Represents the many-to-many relationship between Account and Category,
-    # with an extra field (pointsPerDollar).
-    account = models.ForeignKey(
-        Account,
-        on_delete=models.CASCADE,
-        db_column='aid',
-        primary_key=True
-    )
-    category = models.ForeignKey(
-        Category,
-        on_delete=models.CASCADE,
-        db_column='cid' 
-    )
-    pointsperdollar = models.DecimalField(max_digits=5, decimal_places=2, default=1.0)
-
-    class Meta:
-        unique_together = (("account", "category"),)
-        db_table = 'pointrule'
-
-    def __str__(self):
-        return f"{self.account} - {self.category}"
-
+	cid = models.AutoField(primary_key=True)
+	cname = models.CharField(max_length=75)
+	ctype_id = models.ForeignKey(CategoryType, on_delete=models.CASCADE, default=1, db_column='ctype_id')
+	def __str__(self):
+		return self.name
+	
+class PointRules(models.Model):
+	rid = models.AutoField(primary_key=True)
+	aid = models.ForeignKey(Account, on_delete=models.CASCADE)
+	cid = models.ForeignKey(Category, on_delete=models.CASCADE)
+	multiplier = models.DecimalField(max_digits=4, decimal_places=2, default=0)
+	def __str__(self):
+		return self.name
+	class Meta:
+		unique_together = (('aid', 'cid'),)
 
 class Transaction(models.Model):
-    tid = models.AutoField(primary_key=True)
-    account = models.ForeignKey(
-        Account,
-        on_delete=models.CASCADE,
-        db_column='aid'
-    )
-    category = models.ForeignKey(
-        Category, 
-        on_delete=models.CASCADE,
-        db_column='cid'
-    )
-    tdate = models.DateField(default=timezone.now)
-    # Ensure the amount is greater than 0 with a validator.
-    amount = models.DecimalField(
-        max_digits=12,
-        decimal_places=2,
-        validators=[MinValueValidator(Decimal('0.01'))]
-    )
-    description = models.TextField(blank=True, null=True)
-    pointsearned = models.DecimalField(max_digits=12, decimal_places=2, default=0)
-    isshared = models.BooleanField(default=False)
-
-    class Meta:
-        db_table = 'transaction'
-
-    def __str__(self):
-        return f"Transaction {self.tid}"
-
-
+	tid = models.AutoField(primary_key=True)
+	tdate = models.DateField()
+	description = models.CharField(max_length=255)
+	category = models.ForeignKey(Category, on_delete=models.CASCADE)
+	amount = models.DecimalField(max_digits=6, decimal_places=2)
+	card = models.ForeignKey(Account, on_delete=models.CASCADE)
+	shared = models.BooleanField()
+	points = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+	def __str__(self):
+		return self.name
+	
 class Debt(models.Model):
-    # Each Debt is linked to a Transaction.
-    tid = models.ForeignKey(Transaction, on_delete=models.CASCADE, db_column='tid', primary_key=True)
-    borrowername = models.CharField(max_length=100)
-    amountowed = models.DecimalField(max_digits=12, decimal_places=2)
-    amountrepaid = models.DecimalField(max_digits=12, decimal_places=2, default=0)
-
-    class Meta:
-        db_table = 'debt'
-        unique_together = (('tid', 'borrowername'),)
-
-    def __str__(self):
-        return f"Debt for {self.borrowerName} on Transaction {self.transaction.tid}"
-
-class Payment(models.Model):
-    pid = models.AutoField(primary_key=True)
-    # aidFrom and aidTo are both foreign keys to Account.
-    aidfrom = models.ForeignKey(
-        Account,
-        on_delete=models.CASCADE,
-        related_name='payments_sent',
-        db_column='aidfrom'
-    )
-    aidto = models.ForeignKey(
-        Account,
-        on_delete=models.CASCADE,
-        related_name='payments_received',
-        db_column='aidto'
-    )
-    pdate = models.DateField(default=timezone.now)
-    amount = models.DecimalField(
-        max_digits=12,
-        decimal_places=2,
-        validators=[MinValueValidator(Decimal('0.01'))]
-    )
-
-    class Meta:
-        db_table = 'payment'
-
-    def __str__(self):
-        return f"Payment {self.pid} from {self.aidFrom} to {self.aidTo}"
+	did = models.AutoField(primary_key=True)
+	tid = models.ForeignKey(Transaction, on_delete=models.CASCADE)
+	debtor = models.CharField(max_length=50)
+	amount = models.DecimalField(max_digits=6, decimal_places=2)
+	def __str__(self):
+		return self.name
+	class Meta:
+		unique_together = (('tid', 'debtor'),)
