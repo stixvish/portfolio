@@ -9,15 +9,14 @@
 	height: 100%;
 	opacity: 0.5;
 	z-index: 1;
-}
-
-.background .photo {
-	flex: 1;
-	overflow: hidden;
-	background: {
-		size: cover;
-		position: center;
-		repeat: no-repeat;
+	.photo {
+		flex: 1;
+		overflow: hidden;
+		background: {
+			size: cover;
+			position: center;
+			repeat: no-repeat;
+		}
 	}
 }
 
@@ -26,6 +25,7 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	z-index: 1;
 }
 
 .intro, .desc {
