@@ -1,0 +1,30 @@
+@use './variables' as vars;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: min(4.25svw, 22px);
+}
+
+@media screen and (min-width: 800px) {
+	html {
+		font-size: max(1svw, 12px);
+	}
+}
+
+body {
+	background-color: vars.$color-background;
+	font-family: vars.$font-mac-default;
+	color: white;
+ 	overflow: auto; /* Allow scrolling */
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+ 	scrollbar-width: none; /* Firefox */
+}
+
+::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
