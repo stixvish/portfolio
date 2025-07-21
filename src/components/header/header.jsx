@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import styles from './header.module.scss'
+import { Link, useLocation } from 'react-router-dom';
 
 function Header() {
 
 	const [open, setOpen] = useState(false)
+	const location = useLocation()
 
 	useEffect(() => {
 		if (open) {
@@ -15,6 +17,10 @@ function Header() {
 			document.body.style.overflow = ""; // Clean up on unmount
 		};
 	}, [open]);
+
+	useEffect(() => {
+		setOpen(false)
+	}, [location])
 
 	return (
 		<div className={styles.main}>
@@ -34,10 +40,9 @@ function Header() {
 			</div>
 			<div className={styles.menu} style={{ height: open ? "100svh" : "0" }}>
 				<div className={styles.side} id={styles.links}>
-					<a href='/'>about me</a>
-					<a href='/'>experience</a>
-					<a href='/'>projects</a>
-					<a href='/'>contact me</a>
+					<Link to='/about'>about me</Link>
+					<Link to='/experience'>experience</Link>
+					<Link to='/projects'>projects</Link>
 				</div>
 				<div className={styles.side} id={styles.contact}>
 					<p style={{color: "#a374ff"}}>GET IN TOUCH</p>
