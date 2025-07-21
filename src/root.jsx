@@ -1,12 +1,11 @@
+import Home from './pages/home/home'
 import styles from './root.module.scss'
 
 function Root() {
 
   return (
     <>
-      <div>
-        <p className={styles.hello}>Hello world!</p>
-      </div>
+      <Home />
     </>
   )
 }

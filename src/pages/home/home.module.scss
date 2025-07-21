@@ -1,0 +1,40 @@
+.main {
+	width: 100svw;
+	height: 100svh;
+}
+
+.background {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	opacity: 0.5;
+	z-index: 1;
+}
+
+.background .photo {
+	flex: 1;
+	overflow: hidden;
+	background: {
+		size: cover;
+		position: center;
+		repeat: no-repeat;
+	}
+}
+
+.intro {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.intro, .desc {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.desc {
+	margin-top: 0.5rem;
+}
