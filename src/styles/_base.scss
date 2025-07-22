@@ -8,10 +8,7 @@
 
 html {
 	font-size: min(4.25svw, 22px);
-}
-
-@media screen and (min-width: 800px) {
-	html {
+	@media (min-width: 800px) {
 		font-size: max(1svw, 12px);
 	}
 }

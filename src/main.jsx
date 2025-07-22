@@ -13,6 +13,7 @@ import Home from './pages/home/home'
 import About from './pages/about/about'
 import Experience from './pages/experience/experience'
 import Projects from './pages/projects/projects'
+import Unknown from './pages/unknown/unknown'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
       <Route path='about' element={<About />} />
       <Route path='experience' element={<Experience />} />
       <Route path='projects' element={<Projects/>} />
+      <Route path='*' element={<Unknown/>} />
     </Route>
   )
 )
