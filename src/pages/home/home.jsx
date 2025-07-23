@@ -2,10 +2,11 @@ import {useEffect, useState} from 'react'
 import styles from './home.module.scss'
 
 // grab everything in the images folder
-const modules = import.meta.glob(
+const modules = import.meta.glob([
 	'../../assets/images/*.{jpg,png,jpeg,svg,webp}',
-	{eager: true, import: 'default'}
-)
+	'!../../assets/images/profile.jpeg',
+],{eager: true, import: 'default'})
+
 const allImages = Object.values(modules)
 
 function pickThree(images) {
