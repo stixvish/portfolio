@@ -6,6 +6,34 @@
 	flex-direction: column;
 	gap: 1rem;
 	align-items: center;
+	@media (min-width: 800px) {
+		padding: 5rem 2.5rem 0;
+	}
+}
+
+.outerContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	@media (min-width: 800px) {
+		flex-direction: row;
+		height: 100%;
+		gap: 3rem;
+	}
+}
+
+.innerContainer {
+	display: flex;
+	flex-direction: column;
+	@media (max-width: 799px) {
+		align-items: center;
+		gap: 1rem;
+	}
+	@media (min-width: 800px) {
+		height: 100%;
+		width: 40vw;
+		gap: 1rem;
+	}
 }
 
 .photo {
@@ -16,12 +44,20 @@
 		size: cover;
 		repeat: no-repeat;
 	}
+	@media (min-width: 800px) {
+		width: auto;
+		height: 80%;
+		min-width: 300px;
+	}
 }
 
 .icons {
 	display: flex;
 	gap: 1rem;
 	height: 4vh;
+	@media (min-width: 800px) {
+		justify-content: center;
+	}
 }
 
 .icon {
@@ -34,4 +70,9 @@
 	flex-direction: column;
 	gap: 1rem;
 	text-align: center;
+	@media (min-width: 800px) {
+		justify-content: space-around;
+		height: 80%;
+		text-align: left;
+	}
 }
