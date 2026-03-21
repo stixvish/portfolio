@@ -1,8 +1,13 @@
+import RandomGallery from "@/components/RandomGallery";
+
+export const dynamic = "force-dynamic";
+
 export default function Home() {
 
   return (
     <main className="flex min-h-dvh items-center justify-center">
-      <div className="text-center">
+      <RandomGallery />
+      <div className="text-center relative z-10">
         <div className="leading-tight">
           <h1 className="text-hero -translate-x-8">hello there!</h1>
           <h1 className="text-hero translate-x-8">i&apos;m vishesh.</h1>
