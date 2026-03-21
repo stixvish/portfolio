@@ -21,9 +21,12 @@ export default async function RandomGallery() {
   );
 
   return (
-    <div className="fixed inset-0 grid grid-cols-3 opacity-50">
-      {images.map(({ file, base64 }) => (
-        <div key={file} className="relative">
+    <div className="fixed inset-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 opacity-50">
+      {images.map(({ file, base64 }, i) => (
+        <div
+          key={file}
+          className={`relative ${i === 1 ? "hidden md:block" : ""} ${i === 2 ? "hidden lg:block" : ""}`}
+        >
           <Image
             src={`/gallery/${file}`}
             alt=""
