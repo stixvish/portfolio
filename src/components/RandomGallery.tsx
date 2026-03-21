@@ -9,7 +9,10 @@ function pickRandom<T>(arr: T[], n: number): T[] {
 
 export default async function RandomGallery() {
   const galleryDir = path.join(process.cwd(), "public/gallery");
-  const files = fs.readdirSync(galleryDir);
+  const supported = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
+  const files = fs.readdirSync(galleryDir).filter((f) =>
+    supported.has(path.extname(f).toLowerCase())
+  );
   const picked = pickRandom(files, 3);
 
   const images = await Promise.all(
@@ -31,6 +34,7 @@ export default async function RandomGallery() {
             src={`/gallery/${file}`}
             alt=""
             fill
+            sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
             className="object-cover"
             placeholder="blur"
             blurDataURL={base64}
