@@ -10,8 +10,9 @@ function pickRandom<T>(arr: T[], n: number): T[] {
 export default async function RandomGallery() {
   const galleryDir = path.join(process.cwd(), "public/gallery");
   const supported = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
+  const excluded = new Set(["recess.jpeg"]);
   const files = fs.readdirSync(galleryDir).filter((f) =>
-    supported.has(path.extname(f).toLowerCase())
+    supported.has(path.extname(f).toLowerCase()) && !excluded.has(f)
   );
   const picked = pickRandom(files, 3);
 
@@ -24,7 +25,7 @@ export default async function RandomGallery() {
   );
 
   return (
-    <div className="fixed inset-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 opacity-50">
+    <div className="fixed inset-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 opacity-50 select-none">
       {images.map(({ file, base64 }, i) => (
         <div
           key={file}
@@ -36,6 +37,7 @@ export default async function RandomGallery() {
             fill
             sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
             className="object-cover"
+            draggable={false}
             placeholder="blur"
             blurDataURL={base64}
           />
