@@ -35,9 +35,10 @@ export async function GET() {
 
     const res = await fetch(NOW_PLAYING_ENDPOINT, {
       headers: { Authorization: `Bearer ${accessToken}` },
+      signal: AbortSignal.timeout(3000),
     });
 
-    if (res.status === 204 || res.status > 400) {
+    if (res.status === 204 || res.status >= 400) {
       return Response.json({ playing: false });
     }
 

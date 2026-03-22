@@ -88,7 +88,7 @@ export default function Header() {
         <Link
           href="/"
           className="font-bold transition-colors duration-500 leading-none text-[3rem] lg:text-[clamp(2rem,5.5vw,3rem)]"
-          style={{ color: open ? '#a374ff' : 'white' }}
+          style={{ color: open ? 'var(--color-accent)' : 'white' }}
         >
           stix
         </Link>
@@ -103,7 +103,7 @@ export default function Header() {
             onClick={() => setOpen(true)}
             style={{ opacity: open ? 0 : 1, pointerEvents: open ? 'none' : 'auto', transition: 'opacity 300ms' }}
           >
-            <circle cx="5" cy="5" r="4.5" fill="white" stroke={open ? '#a374ff' : 'transparent'} strokeWidth="0.1" style={{ transition: 'stroke 300ms' }} />
+            <circle cx="5" cy="5" r="4.5" fill="white" stroke={open ? 'var(--color-accent)' : 'transparent'} strokeWidth="0.1" style={{ transition: 'stroke 300ms' }} />
             <line x1="3.5" y1="4.2" x2="6.5" y2="4.2" stroke="black" strokeWidth="0.3" />
             <line x1="3.5" y1="5" x2="6.5" y2="5" stroke="black" strokeWidth="0.3" />
             <line x1="3.5" y1="5.8" x2="6.5" y2="5.8" stroke="black" strokeWidth="0.3" />
@@ -117,7 +117,7 @@ export default function Header() {
             onClick={() => setOpen(false)}
             style={{ opacity: open ? 1 : 0, pointerEvents: open ? 'auto' : 'none', transition: 'opacity 300ms' }}
           >
-            <circle cx="5" cy="5" r="4.5" fill="white" stroke="#a374ff" strokeWidth="0.1" />
+            <circle cx="5" cy="5" r="4.5" fill="white" stroke="var(--color-accent)" strokeWidth="0.1" />
             <line x1="4" y1="4" x2="6" y2="6" stroke="black" strokeWidth="0.5" />
             <line x1="4" y1="6" x2="6" y2="4" stroke="black" strokeWidth="0.5" />
           </svg>
