@@ -17,15 +17,17 @@ export default function About() {
     <main className="min-h-dvh overflow-x-hidden pt-[calc(clamp(3rem,7.5vh,4rem)+2.5vh+1.5rem)] lg:pt-[calc(clamp(3rem,10vh,5rem)+2.5vh+1.5rem)] pl-[7vw] pr-[7vw] md:pl-[5vw] md:pr-[5vw] lg:pl-[2vw] lg:pr-[2vw] pb-6 lg:pb-10 flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-16">
 
       {/* Photo */}
-      <div className="shrink-0 lg:w-[45%] relative h-48 lg:h-[calc(100dvh-clamp(3rem,10vh,5rem)-2.5vh-4rem)] lg:sticky lg:top-[calc(clamp(3rem,10vh,5rem)+2.5vh+1.5rem)] rounded-2xl overflow-hidden">
-        <Image
-          src="/gallery/recess.jpeg"
-          alt="Vishesh Gupta"
-          fill
-          sizes="(min-width: 1024px) 45vw, 100vw"
-          className="object-cover"
-          priority
-        />
+      <div className="shrink-0 lg:w-[45%] lg:sticky lg:top-[calc(clamp(3rem,10vh,5rem)+2.5vh+1.5rem)]">
+        <div className="relative h-48 lg:h-[calc(100dvh-clamp(3rem,10vh,5rem)-2.5vh-4rem)] rounded-2xl overflow-hidden">
+          <Image
+            src="https://pub-7709eb4c4c404d9bb9680872898eaf3e.r2.dev/recess.jpeg"
+            alt="Vishesh Gupta"
+            fill
+            sizes="(min-width: 1024px) 45vw, 100vw"
+            className="object-cover"
+            priority
+          />
+        </div>
       </div>
 
       {/* Notes */}
@@ -37,17 +39,17 @@ export default function About() {
           <h1 className="text-[12vw] lg:text-[5.5vw] font-bold leading-none tracking-tight">
             vishesh gupta<span className="text-accent">.</span>
           </h1>
-          <p className="text-base lg:text-lg text-neutral-500 dark:text-neutral-400 mt-1">computer science student &middot; software engineer</p>
+          <p className="text-lg lg:text-xl text-neutral-500 dark:text-neutral-400 mt-1">computer science student &middot; software engineer</p>
         </div>
 
         {/* Interests */}
         <div className="flex flex-col gap-1">
-          <p className="text-accent text-[1.75rem]">what i&apos;m into</p>
-          <p className="text-2xl lg:text-3xl font-bold">data<span className="text-accent">.</span></p>
-          <p className="text-2xl lg:text-3xl font-bold">basketball<span className="text-accent">.</span></p>
-          <p className="text-2xl lg:text-3xl font-bold">jack &amp; cokes<span className="text-accent">.</span></p>
-          <p className="text-2xl lg:text-3xl font-bold">chess<span className="text-accent">.</span></p>
-          <p className="text-2xl lg:text-3xl font-bold">emotional oranges<span className="text-accent">.</span></p>
+          <p className="text-accent text-[2rem]">what i&apos;m into</p>
+          <p className="text-3xl lg:text-4xl font-bold">data<span className="text-accent">.</span></p>
+          <p className="text-3xl lg:text-4xl font-bold">basketball<span className="text-accent">.</span></p>
+          <p className="text-3xl lg:text-4xl font-bold">jack &amp; cokes<span className="text-accent">.</span></p>
+          <p className="text-3xl lg:text-4xl font-bold">chess<span className="text-accent">.</span></p>
+          <p className="text-3xl lg:text-4xl font-bold">emotional oranges<span className="text-accent">.</span></p>
         </div>
 
         {/* Integrations */}
@@ -56,11 +58,21 @@ export default function About() {
         {/* Bottom: open to + socials */}
         <div className="flex flex-col gap-3">
           <div>
-            <p className="text-accent text-[1.75rem]">open to</p>
-            <p className="text-lg lg:text-xl font-bold">software engineering roles<span className="text-accent">.</span></p>
+            <p className="text-accent text-[2rem]">open to</p>
+            <div className="flex items-baseline gap-4">
+              <p className="text-xl lg:text-2xl font-bold">software engineering roles<span className="text-accent">.</span></p>
+              <a
+                href="https://drive.google.com/file/d/1JNgqNCxxgqBVTXbpx-4a2PpIdmuiBOk0/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xl lg:text-2xl font-bold text-neutral-500 dark:text-neutral-400 hover:text-accent transition-colors duration-200"
+              >
+                resume<span className="text-accent">.</span>
+              </a>
+            </div>
           </div>
           <div>
-            <p className="text-accent text-[1.75rem]">find me</p>
+            <p className="text-accent text-[2rem]">find me</p>
             <div className="flex flex-wrap gap-x-4 gap-y-2">
               {socials.map(({ label, href }) => (
                 <a
@@ -68,7 +80,7 @@ export default function About() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-lg lg:text-xl font-bold text-neutral-500 dark:text-neutral-400 hover:text-accent transition-colors duration-200"
+                  className="text-xl lg:text-2xl font-bold text-neutral-500 dark:text-neutral-400 hover:text-accent transition-colors duration-200"
                 >
                   {label}<span className="text-accent">.</span>
                 </a>
