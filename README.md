@@ -72,7 +72,8 @@ src/
       steam/       # Current / last played game
       letterboxd/  # Last watched film (RSS)
     about/         # About page with live integrations
-    experience/    # Experience page
+    experience/    # Work and education history
+    projects/      # Projects showcase
     page.tsx       # Home page with background gallery
   components/
     Header.tsx         # Navigation with mobile dropdown
