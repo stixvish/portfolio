@@ -7,7 +7,7 @@ const projects = [
       'this website. a personal portfolio built with Next.js and Tailwind CSS. features a spotify integration and links to my cool projects.',
     tags: ['TypeScript', 'Next.js', 'Tailwind CSS'],
     github: 'https://github.com/stixvish/portfolio-next',
-    href: 'https://stixvish.vercel.app',
+    href: 'https://stixvish.com',
     image: '/previews/portfolio.png',
   },
   {
@@ -40,18 +40,23 @@ export default function Projects() {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
         {projects.map((project, i) => (
           <div key={i} className="flex flex-col gap-4">
 
             {/* Image */}
-            <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+            <a
+              href={project.href ?? project.github ?? undefined}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative w-full aspect-video rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800 block"
+            >
               {project.image ? (
                 <Image
                   src={project.image}
                   alt={project.name}
                   fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
                   className="object-cover"
                 />
               ) : (
@@ -60,17 +65,14 @@ export default function Projects() {
                 </div>
               )}
               {project.github && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute top-3 right-3 p-2 rounded-full bg-black/40 text-white hover:bg-accent transition-colors duration-200"
+                <span
+                  className="absolute top-3 right-3 p-2 rounded-full bg-black/40 text-white"
                   aria-label="View on GitHub"
                 >
                   <GitHubIcon />
-                </a>
+                </span>
               )}
-            </div>
+            </a>
 
             {/* Content */}
             <div className="flex flex-col gap-2">
