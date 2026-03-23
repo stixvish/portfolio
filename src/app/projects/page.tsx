@@ -6,7 +6,7 @@ const projects = [
     description:
       'this website. a personal portfolio built with Next.js and Tailwind CSS. features a spotify integration and links to my cool projects.',
     tags: ['TypeScript', 'Next.js', 'Tailwind CSS'],
-    github: 'https://github.com/stixvish/portfolio-next',
+    github: 'https://github.com/stixvish/portfolio',
     href: 'https://stixvish.com',
     image: '/previews/portfolio.png',
   },
@@ -45,34 +45,39 @@ export default function Projects() {
           <div key={i} className="flex flex-col gap-4">
 
             {/* Image */}
-            <a
-              href={project.href ?? project.github ?? undefined}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative w-full aspect-video rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800 block"
-            >
-              {project.image ? (
-                <Image
-                  src={project.image}
-                  alt={project.name}
-                  fill
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover"
-                />
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-sm uppercase tracking-widest text-neutral-400">no image yet</span>
-                </div>
-              )}
+            <div className="relative w-full aspect-video">
+              <a
+                href={project.href ?? undefined}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute inset-0 rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800 block"
+              >
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-sm uppercase tracking-widest text-neutral-400">no image yet</span>
+                  </div>
+                )}
+              </a>
               {project.github && (
-                <span
-                  className="absolute top-3 right-3 p-2 rounded-full bg-black/40 text-white"
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute top-3 right-3 p-2 rounded-full bg-black/40 text-white hover:bg-accent transition-colors duration-200 z-10"
                   aria-label="View on GitHub"
                 >
                   <GitHubIcon />
-                </span>
+                </a>
               )}
-            </a>
+            </div>
 
             {/* Content */}
             <div className="flex flex-col gap-2">
