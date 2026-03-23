@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio
+
+Personal portfolio website built with Next.js, featuring real-time integrations and a dynamic image gallery.
+
+## Features
+
+- **Live integrations** — Spotify (now playing), Steam (current/last game), and Letterboxd (last watched film)
+- **Dynamic background gallery** — 3 random images served from Cloudflare R2 on each visit
+- **Responsive design** — Mobile-friendly header with dropdown navigation
+- **Performance monitoring** — Vercel Analytics and Speed Insights
+
+## Tech Stack
+
+- [Next.js 16](https://nextjs.org) (App Router) + React 19
+- TypeScript + Tailwind CSS 4
+- Cloudflare R2 (image storage, served via `images.stixvish.com`)
+- AWS SDK v3 (Cloudflare R2 S3-compatible API)
+- Vercel (deployment)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Create a `.env.local` file in the project root with the following variables:
+
+```env
+# Spotify
+SPOTIFY_CLIENT_ID=
+SPOTIFY_CLIENT_SECRET=
+SPOTIFY_REFRESH_TOKEN=
+
+# Steam
+STEAM_API_KEY=
+
+# Cloudflare R2
+R2_ACCOUNT_ID=
+R2_ACCESS_KEY_ID=
+R2_SECRET_ACCESS_KEY=
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Getting Spotify credentials:** Create an app at [Spotify Developer Dashboard](https://developer.spotify.com/dashboard), then follow any OAuth refresh token guide to obtain a refresh token with `user-read-currently-playing` and `user-read-recently-played` scopes.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Getting a Steam API key:** Generate one at [steamcommunity.com/dev/apikey](https://steamcommunity.com/dev/apikey).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Cloudflare R2:** Create a bucket and generate an API token with read/write access from the [Cloudflare dashboard](https://dash.cloudflare.com).
 
-## Learn More
+### Running locally
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm start` | Start production server |
+| `npm run lint` | Run ESLint |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+  app/
+    api/
+      spotify/     # Now playing / last played track
+      steam/       # Current / last played game
+      letterboxd/  # Last watched film (RSS)
+    about/         # About page with live integrations
+    experience/    # Experience page
+    page.tsx       # Home page with background gallery
+  components/
+    Header.tsx         # Navigation with mobile dropdown
+    Integrations.tsx   # Spotify / Steam / Letterboxd widgets
+    RandomGallery.tsx  # Cloudflare R2 image gallery
+```
