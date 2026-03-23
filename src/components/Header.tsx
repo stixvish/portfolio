@@ -61,6 +61,7 @@ export default function Header() {
       <div className='fixed z-30 w-full h-[clamp(3rem,7.5vh,4rem)] lg:h-[clamp(3rem,10vh,5rem)] flex justify-between items-center pl-[7vw] pr-[7vw] md:pl-[5vw] md:pr-[5vw] lg:pl-[2vw] lg:pr-[2vw] top-[2.5vh]'>
         <Link
           href="/"
+          onClick={() => setOpen(false)}
           className="font-bold transition-colors duration-500 leading-none text-[2rem] lg:text-[clamp(2rem,5.5vw,3rem)]"
           style={{ color: open ? 'var(--color-accent)' : 'white' }}
         >
