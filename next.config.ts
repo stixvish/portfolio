@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
       { hostname: 'i.scdn.co' },
       { hostname: 'a.ltrbxd.com' },
       { hostname: 'media.steampowered.com' },
+      { hostname: 'cdn.cloudflare.steamstatic.com' },
     ],
   },
 };
