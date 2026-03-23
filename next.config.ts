@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
       { hostname: 'a.ltrbxd.com' },
       { hostname: 'media.steampowered.com' },
       { hostname: 'cdn.cloudflare.steamstatic.com' },
-      { hostname: 'pub-7709eb4c4c404d9bb9680872898eaf3e.r2.dev' },
+      { hostname: 'images.stixvish.com' },
     ],
   },
 };
