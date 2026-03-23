@@ -14,10 +14,10 @@ const socials = [
 
 export default function About() {
   return (
-    <main className="min-h-dvh [@media(min-width:1024px)_and_(min-height:600px)]:h-dvh [@media(min-width:1024px)_and_(min-height:600px)]:overflow-hidden pt-[calc(clamp(3rem,7.5vh,4rem)+2.5vh+1.5rem)] lg:pt-[calc(clamp(3rem,10vh,5rem)+2.5vh+1.5rem)] pl-[7vw] pr-[7vw] md:pl-[5vw] md:pr-[5vw] lg:pl-[2vw] lg:pr-[2vw] pb-6 lg:pb-10 flex flex-col lg:flex-row gap-6 lg:gap-16">
+    <main className="min-h-dvh overflow-x-hidden pt-[calc(clamp(3rem,7.5vh,4rem)+2.5vh+1.5rem)] lg:pt-[calc(clamp(3rem,10vh,5rem)+2.5vh+1.5rem)] pl-[7vw] pr-[7vw] md:pl-[5vw] md:pr-[5vw] lg:pl-[2vw] lg:pr-[2vw] pb-6 lg:pb-10 flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-16">
 
       {/* Photo */}
-      <div className="shrink-0 lg:w-[45%] relative min-h-0 h-48 [@media(min-width:1024px)_and_(min-height:600px)]:h-full rounded-2xl overflow-hidden">
+      <div className="shrink-0 lg:w-[45%] relative h-48 lg:h-[calc(100dvh-clamp(3rem,10vh,5rem)-2.5vh-4rem)] lg:sticky lg:top-[calc(clamp(3rem,10vh,5rem)+2.5vh+1.5rem)] rounded-2xl overflow-hidden">
         <Image
           src="/gallery/recess.jpeg"
           alt="Vishesh Gupta"
@@ -29,20 +29,20 @@ export default function About() {
       </div>
 
       {/* Notes */}
-      <div className="flex flex-col justify-between flex-1 min-h-0 pb-1">
+      <div className="flex flex-col flex-1 gap-6 lg:gap-8 pb-1">
 
         {/* Top: name + location */}
         <div>
-          <p className="text-accent text-xs uppercase tracking-widest mb-1">Chicago, IL</p>
+          <p className="text-accent text-sm lg:text-base uppercase tracking-widest mb-1">Chicago, IL</p>
           <h1 className="text-[12vw] lg:text-[5.5vw] font-bold leading-none tracking-tight">
             vishesh gupta<span className="text-accent">.</span>
           </h1>
-          <p className="text-sm lg:text-base text-neutral-500 dark:text-neutral-400 mt-1">computer science student &middot; software engineer</p>
+          <p className="text-base lg:text-lg text-neutral-500 dark:text-neutral-400 mt-1">computer science student &middot; software engineer</p>
         </div>
 
-        {/* Middle: interests */}
-        <div className="flex flex-col gap-1 mt-6 lg:mt-0">
-          <p className="text-xs uppercase tracking-widest text-neutral-400 mb-2">what i&apos;m into</p>
+        {/* Interests */}
+        <div className="flex flex-col gap-1">
+          <p className="text-accent text-[1.75rem]">what i&apos;m into</p>
           <p className="text-2xl lg:text-3xl font-bold">data<span className="text-accent">.</span></p>
           <p className="text-2xl lg:text-3xl font-bold">basketball<span className="text-accent">.</span></p>
           <p className="text-2xl lg:text-3xl font-bold">jack &amp; cokes<span className="text-accent">.</span></p>
@@ -50,19 +50,17 @@ export default function About() {
           <p className="text-2xl lg:text-3xl font-bold">emotional oranges<span className="text-accent">.</span></p>
         </div>
 
-        {/* Middle: integrations */}
-        <div className="mt-6 lg:mt-0">
-          <Integrations />
-        </div>
+        {/* Integrations */}
+        <Integrations />
 
         {/* Bottom: open to + socials */}
-        <div className="pt-4 flex flex-col gap-3">
+        <div className="flex flex-col gap-3">
           <div>
-            <p className="text-xs uppercase tracking-widest text-neutral-400 mb-1">open to</p>
+            <p className="text-accent text-[1.75rem]">open to</p>
             <p className="text-lg lg:text-xl font-bold">software engineering roles<span className="text-accent">.</span></p>
           </div>
           <div>
-            <p className="text-xs uppercase tracking-widest text-neutral-400 mb-1">find me</p>
+            <p className="text-accent text-[1.75rem]">find me</p>
             <div className="flex flex-wrap gap-x-4 gap-y-2">
               {socials.map(({ label, href }) => (
                 <a

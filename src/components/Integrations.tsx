@@ -59,7 +59,7 @@ export default function Integrations() {
         const info = nowPlaying.playing ? nowPlaying : nowPlaying.lastPlayed!;
         return (
           <div className='flex flex-col gap-2'>
-            <span className='text-accent text-[1.5rem]'>{nowPlaying.playing ? 'listening to' : 'last listened'}</span>
+            <span className='text-accent text-[1.75rem]'>{nowPlaying.playing ? 'listening to' : 'last listened'}</span>
             <a
               href={info.url}
               target='_blank'
@@ -76,8 +76,8 @@ export default function Integrations() {
               )}
               <Image src={info.albumArt} alt='album art' width={48} height={48} className='rounded' />
               <div className='flex flex-col leading-tight'>
-                <span className='font-medium group-hover:text-accent transition-colors duration-300'>{info.track}</span>
-                <span className='text-sm group-hover:text-accent transition-colors duration-300'>{info.artist}</span>
+                <span className='text-lg font-medium group-hover:text-accent transition-colors duration-300'>{info.track}</span>
+                <span className='text-base group-hover:text-accent transition-colors duration-300'>{info.artist}</span>
               </div>
             </a>
           </div>
@@ -85,7 +85,7 @@ export default function Integrations() {
       })()}
       {lastWatched.found && (
         <div className='flex flex-col gap-2'>
-          <span className='text-accent text-[1.5rem]'>last watched</span>
+          <span className='text-accent text-[1.75rem]'>last watched</span>
           <a
             href={lastWatched.url}
             target='_blank'
@@ -96,12 +96,12 @@ export default function Integrations() {
               <Image src={lastWatched.poster} alt={lastWatched.title} width={40} height={60} className='rounded object-cover' />
             )}
             <div className='flex flex-col leading-tight'>
-              <span className='font-medium group-hover:text-accent transition-colors duration-300'>
+              <span className='text-lg font-medium group-hover:text-accent transition-colors duration-300'>
                 {lastWatched.title}
                 {lastWatched.year && <span className='font-normal'> ({lastWatched.year})</span>}
               </span>
               {lastWatched.rating && (
-                <span className='text-sm group-hover:text-accent transition-colors duration-300'>{lastWatched.rating} / 5</span>
+                <span className='text-base group-hover:text-accent transition-colors duration-300'>{lastWatched.rating} / 5</span>
               )}
             </div>
           </a>
@@ -109,7 +109,7 @@ export default function Integrations() {
       )}
       {lastGame.found && (
         <div className='flex flex-col gap-2'>
-          <span className='text-accent text-[1.5rem]'>{lastGame.active ? 'playing now' : 'last played'}</span>
+          <span className='text-accent text-[1.75rem]'>{lastGame.active ? 'playing now' : 'last played'}</span>
           <a
             href={lastGame.url}
             target='_blank'
@@ -126,9 +126,9 @@ export default function Integrations() {
             )}
             <Image src={lastGame.icon} alt={lastGame.name} width={48} height={48} className='rounded' />
             <div className='flex flex-col leading-tight'>
-              <span className='font-medium group-hover:text-accent transition-colors duration-300'>{lastGame.name}</span>
-              {lastGame.active && lastGame.playtime !== undefined && (
-                <span className='text-sm group-hover:text-accent transition-colors duration-300'>{lastGame.playtime.toLocaleString()} hrs on record</span>
+              <span className='text-lg font-medium group-hover:text-accent transition-colors duration-300'>{lastGame.name}</span>
+              {lastGame.playtime !== undefined && (
+                <span className='text-base group-hover:text-accent transition-colors duration-300'>{lastGame.playtime.toLocaleString()} hrs on record</span>
               )}
             </div>
           </a>

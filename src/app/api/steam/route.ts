@@ -57,8 +57,9 @@ export async function GET() {
     const last = games.sort((a, b) => b.rtime_last_played - a.rtime_last_played)[0];
     const icon = `https://media.steampowered.com/steamcommunity/public/images/apps/${last.appid}/${last.img_icon_url}.jpg`;
     const url = `https://store.steampowered.com/app/${last.appid}`;
+    const playtime = Math.round(last.playtime_forever / 60);
 
-    return Response.json({ found: true, active: false, name: last.name, icon, url });
+    return Response.json({ found: true, active: false, name: last.name, icon, url, playtime });
   } catch {
     return Response.json({ found: false });
   }
