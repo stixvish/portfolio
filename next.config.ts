@@ -1,8 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
+  images: {
+    remotePatterns: [
+      { hostname: 'i.scdn.co' },
+      { hostname: 'a.ltrbxd.com' },
+      { hostname: 'media.steampowered.com' },
+    ],
+  },
 };
 
 export default nextConfig;
