@@ -1,7 +1,6 @@
 import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3';
 import path from 'path';
 import Image from 'next/image';
-import { getPlaiceholder } from 'plaiceholder';
 
 const r2 = new S3Client({
   region: 'auto',
@@ -16,9 +15,10 @@ function pickRandom<T>(arr: T[], n: number): T[] {
   return [...arr].sort(() => Math.random() - 0.5).slice(0, n);
 }
 
+const PUBLIC_URL = 'https://images.stixvish.com';
+
 export default async function RandomGallery() {
-  const PUBLIC_URL = process.env.R2_PUBLIC_URL!;
-  const BUCKET = process.env.R2_BUCKET_NAME!;
+  const BUCKET = 'portfolio-gallery';
   const supported = new Set(['.jpg', '.jpeg', '.png', '.webp', '.avif']);
   const excluded = new Set(['recess.jpeg']);
 
@@ -29,31 +29,20 @@ export default async function RandomGallery() {
 
   const picked = pickRandom(files, 3);
 
-  const images = await Promise.all(
-    picked.map(async (file) => {
-      const url = `${PUBLIC_URL}/${file}`;
-      const buffer = await fetch(url).then((r) => r.arrayBuffer()).then((b) => Buffer.from(b));
-      const { base64 } = await getPlaiceholder(buffer);
-      return { file, url, base64 };
-    })
-  );
-
   return (
     <div className="fixed inset-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 opacity-50 select-none">
-      {images.map(({ file, url, base64 }, i) => (
+      {picked.map((file, i) => (
         <div
           key={file}
           className={`relative ${i === 1 ? 'hidden md:block' : ''} ${i === 2 ? 'hidden lg:block' : ''}`}
         >
           <Image
-            src={url}
+            src={`${PUBLIC_URL}/${file}`}
             alt=""
             fill
             sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
             className="object-cover"
             draggable={false}
-            placeholder="blur"
-            blurDataURL={base64}
           />
         </div>
       ))}

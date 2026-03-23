@@ -20,7 +20,7 @@ export default function About() {
       <div className="shrink-0 lg:w-[45%] lg:sticky lg:top-[calc(clamp(3rem,10vh,5rem)+2.5vh+1.5rem)]">
         <div className="relative h-48 lg:h-[calc(100dvh-clamp(3rem,10vh,5rem)-2.5vh-4rem)] rounded-2xl overflow-hidden">
           <Image
-            src="https://pub-7709eb4c4c404d9bb9680872898eaf3e.r2.dev/recess.jpeg"
+            src="https://images.stixvish.com/recess.jpeg"
             alt="Vishesh Gupta"
             fill
             sizes="(min-width: 1024px) 45vw, 100vw"
