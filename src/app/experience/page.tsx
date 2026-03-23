@@ -7,6 +7,7 @@ const education = [
     period: 'Aug 2024 – Aug 2026',
     location: 'Chicago, IL',
     logo: '/logos/iit.png',
+    href: 'https://www.iit.edu',
   },
   {
     school: 'college of dupage',
@@ -14,6 +15,7 @@ const education = [
     period: 'May 2023 – May 2024',
     location: 'Glen Ellyn, IL',
     logo: '/logos/cod.jpg',
+    href: 'https://www.cod.edu',
   },
   {
     school: 'arizona state university',
@@ -21,6 +23,7 @@ const education = [
     period: 'Aug 2021 – Dec 2022',
     location: 'Tempe, AZ',
     logo: '/logos/asu.jpg',
+    href: 'https://www.asu.edu',
   },
 ];
 
@@ -36,6 +39,7 @@ const experiences = [
     ],
     tags: ['Java', 'Atlassian SDK', 'Agile'],
     logo: '/logos/isos.jpg',
+    href: 'https://www.isostechnology.com',
   },
   {
     company: 'national science foundation',
@@ -48,6 +52,7 @@ const experiences = [
     ],
     tags: ['JavaScript', 'MongoDB', 'React.js'],
     logo: '/logos/nsf.jpg',
+    href: 'https://www.nsf.gov',
   },
 ];
 
@@ -78,9 +83,14 @@ export default function Experience() {
                 <div className="relative w-10 h-10 rounded-md overflow-hidden shrink-0">
                   <Image src={exp.logo} alt={exp.company} fill sizes="40px" className="object-contain" />
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-bold leading-tight">
+                <a
+                  href={exp.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-3xl lg:text-4xl font-bold leading-tight hover:text-accent transition-colors duration-200"
+                >
                   {exp.company}<span className="text-accent">.</span>
-                </h2>
+                </a>
               </div>
               <p className="text-base lg:text-lg uppercase tracking-widest text-neutral-400 mb-1">
                 {exp.period} &middot; {exp.location}
@@ -117,9 +127,14 @@ export default function Experience() {
                 <div className="relative w-10 h-10 rounded-md overflow-hidden shrink-0">
                   <Image src={edu.logo} alt={edu.school} fill sizes="40px" className="object-contain" />
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-bold leading-tight">
+                <a
+                  href={edu.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-3xl lg:text-4xl font-bold leading-tight hover:text-accent transition-colors duration-200"
+                >
                   {edu.school}<span className="text-accent">.</span>
-                </h2>
+                </a>
               </div>
               <p className="text-base lg:text-lg uppercase tracking-widest text-neutral-400 mb-1">
                 {edu.period} &middot; {edu.location}
