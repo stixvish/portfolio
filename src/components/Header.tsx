@@ -4,13 +4,19 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+type TrackInfo = { track: string; artist: string; albumArt: string; url: string };
+
 type NowPlaying =
-  | { playing: false }
-  | { playing: true; track: string; artist: string; albumArt: string; url: string };
+  | { playing: false; lastPlayed?: TrackInfo }
+  | ({ playing: true } & TrackInfo);
 
 type LastWatched =
   | { found: false }
   | { found: true; title: string; year: string; rating: number | null; poster: string; url: string };
+
+type LastGame =
+  | { found: false }
+  | { found: true; name: string; icon: string; url: string };
 
 const links = [
   { href: '/about', label: 'about me' },
@@ -22,7 +28,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [nowPlaying, setNowPlaying] = useState<NowPlaying>({ playing: false });
   const [lastWatched, setLastWatched] = useState<LastWatched>({ found: false });
-
+  const [lastGame, setLastGame] = useState<LastGame>({ found: false });
   useEffect(() => {
     const fetchNowPlaying = () =>
       fetch('/api/spotify')
@@ -42,6 +48,13 @@ export default function Header() {
       .catch(() => {});
   }, []);
 
+  useEffect(() => {
+    fetch('/api/steam')
+      .then((r) => r.json())
+      .then(setLastGame)
+      .catch(() => {});
+  }, []);
+
   return (
     <header>
       {/* dropdown nav */}
@@ -50,36 +63,43 @@ export default function Header() {
         style={{ clipPath: open ? 'inset(0 0 0% 0)' : 'inset(0 0 100% 0)' }}
       >
         <div className='flex flex-col leading-none justify-end w-full lg:w-1/2 gap-5'>
-          {nowPlaying.playing && (
-            <div className='flex flex-col gap-2'>
-              <span className='text-accent text-[1.5rem]'>listening to</span>
-              <a
-                href={nowPlaying.url}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='flex items-center gap-3 w-fit hover:opacity-50 transition-opacity'
-              >
-                <div className='relative shrink-0 flex items-center justify-center w-5 h-5'>
-                  <span className='absolute inline-flex w-full h-full rounded-full bg-[#1DB954] opacity-50 animate-ping' />
-                  <svg
-                    viewBox='0 0 24 24'
-                    width={20}
-                    height={20}
-                    fill='#1DB954'
-                    className='relative'
-                    xmlns='http://www.w3.org/2000/svg'
-                  >
-                    <path d='M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z' />
-                  </svg>
-                </div>
-                <Image src={nowPlaying.albumArt} alt='album art' width={48} height={48} className='rounded' />
-                <div className='flex flex-col leading-tight'>
-                  <span className='text-background font-medium'>{nowPlaying.track}</span>
-                  <span className='text-background text-sm'>{nowPlaying.artist}</span>
-                </div>
-              </a>
-            </div>
-          )}
+          {(nowPlaying.playing || nowPlaying.lastPlayed) && (() => {
+            const info = nowPlaying.playing ? nowPlaying : nowPlaying.lastPlayed!;
+            return (
+              <div className='flex flex-col gap-2'>
+                {/* spotify integration */}
+                <span className='text-accent text-[1.5rem]'>{nowPlaying.playing ? 'listening to' : 'last listened'}</span>
+                <a
+                  href={info.url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='flex items-center gap-3 w-fit group'
+                >
+                  {nowPlaying.playing && (
+                    <div className='relative shrink-0 flex items-center justify-center w-8 h-8'>
+                      <span className='absolute inline-flex w-full h-full rounded-full bg-[#1DB954] opacity-50 animate-ping' />
+                      <svg
+                        viewBox='0 0 24 24'
+                        width={32}
+                        height={32}
+                        fill='#1DB954'
+                        className='relative'
+                        xmlns='http://www.w3.org/2000/svg'
+                      >
+                        <path d='M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z' />
+                      </svg>
+                    </div>
+                  )}
+                  <Image src={info.albumArt} alt='album art' width={48} height={48} className='rounded' />
+                  <div className='flex flex-col leading-tight'>
+                    <span className='text-background font-medium group-hover:text-accent transition-colors duration-300'>{info.track}</span>
+                    <span className='text-background text-sm group-hover:text-accent transition-colors duration-300'>{info.artist}</span>
+                  </div>
+                </a>
+              </div>
+            );
+          })()}
+          {/* letterboxd integration */}
           {lastWatched.found && (
             <div className='flex flex-col gap-2'>
               <span className='text-accent text-[1.5rem]'>last watched</span>
@@ -87,31 +107,47 @@ export default function Header() {
                 href={lastWatched.url}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='flex items-center gap-3 w-fit hover:opacity-50 transition-opacity'
+                className='flex items-center gap-3 w-fit group'
               >
                 {lastWatched.poster && (
                   <Image src={lastWatched.poster} alt={lastWatched.title} width={32} height={48} className='rounded object-cover' />
                 )}
                 <div className='flex flex-col leading-tight'>
-                  <span className='text-background font-medium'>
+                  <span className='text-background font-medium group-hover:text-accent transition-colors duration-300'>
                     {lastWatched.title}
-                    {lastWatched.year && <span className='text-background font-normal'> ({lastWatched.year})</span>}
+                    {lastWatched.year && <span className='font-normal'> ({lastWatched.year})</span>}
                   </span>
                   {lastWatched.rating && (
-                    <span className='text-background text-sm'>{lastWatched.rating} / 5</span>
+                    <span className='text-background text-sm group-hover:text-accent transition-colors duration-300'>{lastWatched.rating} / 5</span>
                   )}
                 </div>
               </a>
             </div>
           )}
+          {/* steam integration */}
+          {lastGame.found && (
+            <div className='flex flex-col gap-2'>
+              <span className='text-accent text-[1.5rem]'>last played</span>
+              <a
+                href={lastGame.url}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='flex items-center gap-3 w-fit group'
+              >
+                <Image src={lastGame.icon} alt={lastGame.name} width={32} height={32} className='rounded' />
+                <span className='text-background font-medium group-hover:text-accent transition-colors duration-300'>{lastGame.name}</span>
+              </a>
+            </div>
+          )}
         </div>
+        {/* nav links */}
         <nav className='flex flex-col justify-end w-full lg:w-1/2 flex-1 gap-3 lg:gap-5'>
           {links.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
               onClick={() => setOpen(false)}
-              className='text-black tracking-tight leading-none text-[4rem] lg:text-[clamp(5rem,7vw,7rem)] font-bold hover:opacity-50 transition-opacity'
+              className='text-black hover:text-accent transition-colors duration-300 tracking-tight leading-none text-[4rem] lg:text-[clamp(5rem,7vw,7rem)] font-bold'
             >
               {label}
             </Link>
@@ -120,10 +156,10 @@ export default function Header() {
       </div>
     
       {/* main header idea */}
-      <div className='fixed z-30 w-full h-[8vh] flex justify-between items-center pl-[7vw] pr-[7vw] md:pl-[5vw] md:pr-[5vw] lg:pl-[2vw] lg:pr-[2vw] top-[2vh]'>
+      <div className='fixed z-30 w-full h-[7.5vh] lg:h-[10vh] flex justify-between items-center pl-[7vw] pr-[7vw] md:pl-[5vw] md:pr-[5vw] lg:pl-[2vw] lg:pr-[2vw] top-[2.5vh]'>
         <Link
           href="/"
-          className="font-bold transition-colors duration-500 leading-none text-[3rem] lg:text-[clamp(2rem,5.5vw,3rem)]"
+          className="font-bold transition-colors duration-500 leading-none text-[2rem] lg:text-[clamp(2rem,5.5vw,3rem)]"
           style={{ color: open ? 'var(--color-accent)' : 'white' }}
         >
           stix

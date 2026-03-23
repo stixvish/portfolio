@@ -1,5 +1,6 @@
 const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
 const NOW_PLAYING_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-playing';
+const RECENTLY_PLAYED_ENDPOINT = 'https://api.spotify.com/v1/me/player/recently-played?limit=1';
 
 let cachedToken: string | null = null;
 let tokenExpiresAt = 0;
@@ -29,6 +30,15 @@ async function getAccessToken(): Promise<string> {
   return cachedToken!;
 }
 
+function trackPayload(track: { name: string; artists: { name: string }[]; album: { images: { url: string }[] }; external_urls: { spotify: string } }) {
+  return {
+    track: track.name,
+    artist: track.artists.map((a) => a.name).join(', '),
+    albumArt: track.album.images[2]?.url ?? track.album.images[0]?.url,
+    url: track.external_urls.spotify,
+  };
+}
+
 export async function GET() {
   try {
     const accessToken = await getAccessToken();
@@ -38,23 +48,28 @@ export async function GET() {
       signal: AbortSignal.timeout(3000),
     });
 
-    if (res.status === 204 || res.status >= 400) {
-      return Response.json({ playing: false });
+    if (res.status !== 204 && res.status < 400) {
+      const data = await res.json();
+      if (data.is_playing && data.currently_playing_type === 'track') {
+        return Response.json({ playing: true, ...trackPayload(data.item) });
+      }
     }
 
-    const data = await res.json();
-
-    if (!data.is_playing || data.currently_playing_type !== 'track') {
-      return Response.json({ playing: false });
-    }
-
-    return Response.json({
-      playing: true,
-      track: data.item.name,
-      artist: data.item.artists.map((a: { name: string }) => a.name).join(', '),
-      albumArt: data.item.album.images[2]?.url ?? data.item.album.images[0]?.url,
-      url: data.item.external_urls.spotify,
+    // Fall back to recently played
+    const recentRes = await fetch(RECENTLY_PLAYED_ENDPOINT, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+      signal: AbortSignal.timeout(3000),
     });
+
+    if (recentRes.ok) {
+      const recentData = await recentRes.json();
+      const lastTrack = recentData.items?.[0]?.track;
+      if (lastTrack) {
+        return Response.json({ playing: false, lastPlayed: trackPayload(lastTrack) });
+      }
+    }
+
+    return Response.json({ playing: false });
   } catch {
     return Response.json({ playing: false });
   }
