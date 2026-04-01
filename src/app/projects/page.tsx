@@ -11,13 +11,13 @@ const projects = [
     image: '/previews/portfolio.png',
   },
   {
-    name: 'cli tool',
+    name: 'arbitrage sports betting dashboard',
     description:
-      'a command-line utility that automates a tedious workflow. saved me hours every week.',
-    tags: ['Go', 'Cobra'],
-    github: 'https://github.com/stixvish/cli-tool',
-    href: null,
-    image: null,
+      'a real-time dashboard for monitoring arbitrage opportunities in sports betting.',
+    tags: ['Node.js', 'Supabase', 'EC2', 'System Design'],
+    github: 'https://github.com/stixvish/arbitrage-betting',
+    href: 'https://arbitrage.stixvish.com',
+    image: '/previews/arbDashboard.png',
   },
 ];
 
