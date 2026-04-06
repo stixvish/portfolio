@@ -4,14 +4,15 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const statements = [
-  'i build things that matter.',
-  'chicago-made, everywhere-bound.',
-  'software is just math you can ship.',
-  'always learning, occasionally sleeping.',
-  'i write code and overthink chess moves.',
-  'data nerd with good taste in music.',
-  'cs student by day, bug-fixer by night.',
-  'basketball > meetings.',
+  'thanks for checking out my website!',
+  'currently working on some cool projects.',
+  'currently completing assignments.',
+  'currently learning new things.',
+  'currently looking for new opportunities.',
+  'currently learning how to DJ.',
+  'currently trying to get better at chess.',
+  'currently trying to learn how to cook something other than pasta.',
+  'currently figuring out what to write here.',
 ];
 
 const links = [

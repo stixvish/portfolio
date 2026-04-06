@@ -14,7 +14,7 @@ const socials = [
 
 export default function About() {
   return (
-    <main className="min-h-dvh overflow-x-hidden pt-[calc(clamp(3rem,7.5vh,4rem)+2.5vh+1.5rem)] lg:pt-[calc(clamp(3rem,10vh,5rem)+2.5vh+1.5rem)] pl-[7vw] pr-[7vw] md:pl-[5vw] md:pr-[5vw] lg:pl-[2vw] lg:pr-[2vw] pb-6 lg:pb-10 flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-16">
+    <main className="min-h-dvh overflow-x-clip pt-[calc(clamp(3rem,7.5vh,4rem)+2.5vh+1.5rem)] lg:pt-[calc(clamp(3rem,10vh,5rem)+2.5vh+1.5rem)] pl-[7vw] pr-[7vw] md:pl-[5vw] md:pr-[5vw] lg:pl-[2vw] lg:pr-[2vw] pb-6 lg:pb-10 flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-16">
 
       {/* Photo */}
       <div className="shrink-0 lg:w-[45%] lg:sticky lg:top-[calc(clamp(3rem,10vh,5rem)+2.5vh+1.5rem)]">
@@ -46,6 +46,7 @@ export default function About() {
         <div className="flex flex-col gap-1">
           <p className="text-accent text-[2rem]">what i&apos;m into</p>
           <p className="text-3xl lg:text-4xl font-bold">data<span className="text-accent">.</span></p>
+          <p className="text-3xl lg:text-4xl font-bold">working out<span className="text-accent">.</span></p>
           <p className="text-3xl lg:text-4xl font-bold">basketball<span className="text-accent">.</span></p>
           <p className="text-3xl lg:text-4xl font-bold">jack &amp; cokes<span className="text-accent">.</span></p>
           <p className="text-3xl lg:text-4xl font-bold">chess<span className="text-accent">.</span></p>
