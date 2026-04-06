@@ -38,13 +38,13 @@ export default function Header() {
         style={{ clipPath: open ? 'inset(0 0 0% 0)' : 'inset(0 0 100% 0)' }}
       >
         {/* rotating statement */}
-        <div className='flex flex-col justify-end w-full lg:w-[30%]'>
-          <p className='text-accent leading-tight tracking-tight text-[1.25rem] lg:text-[clamp(1.25rem,2vw,2rem)]'>
+        <div className='flex flex-col justify-end w-full lg:w-1/2'>
+          <p className='text-accent leading-tight tracking-tight text-[1.25rem] lg:text-[clamp(1.25rem,2vw,2rem)] lg:max-w-[30vw]'>
             {statement}
           </p>
         </div>
         {/* nav links */}
-        <nav className='flex flex-col justify-end w-full flex-1 gap-3 lg:gap-5'>
+        <nav className='flex flex-col justify-end w-full lg:w-1/2 flex-1 gap-3 lg:gap-5'>
           {links.map(({ href, label }) => (
             <Link
               key={href}
